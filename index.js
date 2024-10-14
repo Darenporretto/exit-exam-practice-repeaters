@@ -25,17 +25,13 @@ Succession", "It's Always Sunny in Philadelphia"]) => LOGS
 
 
 let printValuesInReverse = function(array) {
- 
-  let reversedValues = [];
-
-  for (let value of array) {
+  for (let i = array.length - 1; i >= 0; i--) {
+    let value = array[i];
     if (value.length % 2 !== 0) { 
-      reversedValues.push(value.split('').reverse().join(''));
+      console.log(value);
     }
   }
-
-  return reversedValues;
-};
+}; 
 
 /*
 Problem #3: Declare a variable using the let keyword called favoriteShow that is 
