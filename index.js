@@ -4,7 +4,13 @@ Problem #1: Create an array called favoriteTvShows and populate it with your 5
 favorite TV Shows.
  */
 
-let favoriteTVShows;
+let favoriteTVShows = [
+  'Twin Peaks',
+  'The Munsters',
+  'Black Mirror',
+  'Adventure Time',
+  'Metalocalypse'
+];
 
 /*
 Problem #2: Create a function called printValuesInReverse. This function should 
@@ -19,7 +25,16 @@ Succession", "It's Always Sunny in Philadelphia"]) => LOGS
 
 
 let printValuesInReverse = function(array) {
-  
+ 
+  let reversedValues = [];
+
+  for (let value of array) {
+    if (value.length % 2 !== 0) { 
+      reversedValues.push(value.split('').reverse().join(''));
+    }
+  }
+
+  return reversedValues;
 };
 
 /*
@@ -30,7 +45,11 @@ and stillRunning should be assigned a boolean based on whether the show is "stil
 running" or has ended.
  */
 
-let favoriteShow;
+let favoriteShow = {
+  title: 'Twin Peaks',
+  genre: 'Mystery, Drama',
+  stillRunning: false
+};
 
 /*
 Problem #4: Create a function called getObjectKeys that takes in an 
@@ -39,7 +58,14 @@ value at that key is a boolean.
  */
 
 let getObjectKeys = function(object) {
-  
+  let keysWithBoolean = [];
+
+  for (let key in object) {
+    if (typeof object[key] === 'boolean') {
+      keysWithBoolean.push(key);
+    }
+  }
+  return keysWithBoolean;
 };
 
 /*
@@ -49,7 +75,14 @@ are strings.
  */
 
 const getObjectValues = function(object) {
-  
+  let stringValues = [];
+
+  for (let key in object) {
+    if (typeof object[key] === 'string') {
+      stringValues.push(object[key]);
+    }
+  }
+  return stringValues;
 };
 
 
@@ -61,7 +94,10 @@ key and the input value added as a value to that key.
  */
 
 const returnNewObj = function(object, key, value) {
-  
+  return {
+    ...object,
+    [key]: value
+  };
 };
 
 
@@ -72,7 +108,8 @@ assign it the value of the input value.
  */
 
 const addProperty = function(object, key, value) {
-  
+object[key] = value;
+return object;
 };
 
 /////////////////////// DATA SET ///////////////////////
@@ -119,7 +156,7 @@ undefined.
  */
 
 const findByTitle = function(array, title) {
-  
+return array.find(show => show.title === title);
 };
 
 
@@ -132,7 +169,7 @@ property is "Comedy".
  */
 
 var getComedies = function(array) {
-  
+  return array.filter(show => show.genre === 'Comedy');
 };
 
 
@@ -144,7 +181,11 @@ and return the average number of seasons for all of the tv shows.
  */
 
 const getAverageOfSeasons = function(array) {
-  
+if (array.length === 0) return 0;
+//use reduce
+const totalSeasons = array.reduce((sum, show) => sum + show.seasons, 0);
+//get avg by division
+return totalSeasons / array.length;
 };
 
 
@@ -171,5 +212,12 @@ nested object.
  */
 
 var recursivelyGetNodeSum = function(object, sum=0) {
-  
+  //base
+  if (object === null) {
+    return sum;
+  }
+  //add value to sum
+  sum += object.value;
+  //recursion
+  return recursivelyGetNodeSum(object.node, sum);
 };
